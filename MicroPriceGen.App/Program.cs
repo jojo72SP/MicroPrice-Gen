@@ -27,6 +27,8 @@
         }
         history.ExportCsv("prices.csv");
         Console.WriteLine($"Export termine : {history.MarketStates.Count} lignes");
+        Console.WriteLine($"Ordres restants dans le carnet : {book.Bids.Count + book.Asks.Count}");
+        
 
 
     }
