@@ -1,0 +1,5 @@
+<Solution>
+  <Project Path="MicroPriceGen.App/MicroPriceGen.App.csproj" />
+  <Project Path="MicroPriceGen.Core/MicroPriceGen.Core.csproj" />
+  <Project Path="MicroPriceGen.Tests/MicroPriceGen.Tests.csproj" />
+</Solution>
