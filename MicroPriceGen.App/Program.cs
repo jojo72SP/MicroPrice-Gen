@@ -14,21 +14,27 @@
 
         for (int i = 0; i < 1000; i++)
         {
-            var order = generator.NextOrder();
-            var trades = engine.Submit(order);
             int volume = 0;
-            foreach (var trade in trades) { volume += trade.Quantity; }
-        
-        decimal? bestBid = book.GetBestBid();
-        decimal? bestAsk = book.GetBestAsk();
-        if (bestBid == null || bestAsk == null) {continue;}
-        var state = new MarketState(generator.CurrentTime, volume, bestBid.Value, bestAsk.Value);
-        history.Record(state);
+            if (generator.ShouldCancel())
+            {
+                generator.CancelRandomOrder();
+            }
+            else
+            {
+                var order = generator.NextOrder();
+                var trades = engine.Submit(order);
+                foreach (var trade in trades) { volume += trade.Quantity; }
+            }
+            decimal? bestBid = book.GetBestBid();
+            decimal? bestAsk = book.GetBestAsk();
+            if (bestBid == null || bestAsk == null) { continue; }
+            var state = new MarketState(generator.CurrentTime, volume, bestBid.Value, bestAsk.Value);
+            history.Record(state);
         }
         history.ExportCsv("prices.csv");
         Console.WriteLine($"Export termine : {history.MarketStates.Count} lignes");
         Console.WriteLine($"Ordres restants dans le carnet : {book.Bids.Count + book.Asks.Count}");
-        
+
 
 
     }

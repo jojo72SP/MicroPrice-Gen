@@ -42,7 +42,7 @@ public class EventGenerator
             side = Side.Sell;
         }
         OrderType orderType;
-        if (Tirage.Next(10) < 8)
+        if (Tirage.Next(10) < 7)
         {
             orderType = OrderType.Limit;
         }
@@ -71,4 +71,15 @@ public class EventGenerator
         NextId++;  // peut également s'écrire NextId += 1; ou NextId = NextId + 1;
         return order;
     }
+    public void CancelRandomOrder()
+    {
+        CurrentTime += 1;
+        List<Order> list;
+        if (Tirage.Next(2) == 0) { list = OrderBook.Bids; } else { list = OrderBook.Asks; }
+        if (list.Count == 0) {return;}
+        int index = Tirage.Next(list.Count);
+        OrderBook.RemoveOrder(list[index]);
+    }
+    public bool ShouldCancel() {return Tirage.Next(10) < 3;}
+
 }
