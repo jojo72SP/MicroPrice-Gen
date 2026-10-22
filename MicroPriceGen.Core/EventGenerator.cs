@@ -80,6 +80,6 @@ public class EventGenerator
         int index = Tirage.Next(list.Count);
         OrderBook.RemoveOrder(list[index]);
     }
-    public bool ShouldCancel() {return Tirage.Next(10) < 2;}
+    public bool ShouldCancel() {return Tirage.Next(100) < 25;}
 
 }

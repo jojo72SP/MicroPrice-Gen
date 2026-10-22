@@ -1,4 +1,6 @@
-﻿public class Program
+﻿using System.Data;
+
+public class Program
 {
     static void Main()
     {
@@ -34,6 +36,14 @@
         history.ExportCsv("prices.csv");
         Console.WriteLine($"Export termine : {history.MarketStates.Count} lignes");
         Console.WriteLine($"Ordres restants dans le carnet : {book.Bids.Count + book.Asks.Count}");
+        decimal max = history.MarketStates[0].Mid;
+        decimal min = history.MarketStates[0].Mid;
+        foreach (var state in history.MarketStates)
+        {
+            if (state.Mid > max) {max = state.Mid;}
+            if (state.Mid < min) {min = state.Mid;}
+        }
+        Console.WriteLine($"Amplitude du Mid : {(max - min) / 0.01m } ticks");
 
 
 
