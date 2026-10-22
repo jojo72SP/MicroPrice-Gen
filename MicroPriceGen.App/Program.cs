@@ -14,7 +14,7 @@ public class Program
         Console.WriteLine($"Seed : {seed}");
         var generator = new EventGenerator(book, 100, 0.01m, seed);
 
-        for (int i = 0; i < 1000; i++)
+        for (int i = 0; i < 10000; i++)
         {
             int volume = 0;
             if (generator.ShouldCancel())
